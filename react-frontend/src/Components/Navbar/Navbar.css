@@ -1,0 +1,24 @@
+.Navbar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2176ff;
+    top: 0;
+    left: 0;
+    height: 41px;
+    width: 100%;
+}
+
+.navButtons{
+    gap: 5px;
+    padding-right: 37px;
+    margin-left: 21px;
+}
+
+.button{
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    gap: 11px;
+    padding: 21px;
+    }

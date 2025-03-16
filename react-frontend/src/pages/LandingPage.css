@@ -1,0 +1,14 @@
+.navbar{
+    margin-bottom: 500px;
+    position: relative;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.content{
+    transform: translateY(-350px);
+}

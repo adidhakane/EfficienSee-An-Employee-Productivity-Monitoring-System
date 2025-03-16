@@ -1,0 +1,104 @@
+.loginsignup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    z-index: 3;
+}
+
+/* Overlay - Ensure it has a background */
+.loginsignup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Ensure full coverage */
+    z-index: 0;
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.content {
+    position: relative;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    z-index: 2; /* Ensures content appears above the overlay */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(243, 211, 197, 0.105);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 5;
+    position: relative; /* Ensure z-index takes effect */
+    margin: 6px;
+    padding: 46px;
+}
+
+.text{
+    margin-top: 4px;
+}
+
+.input input{
+    padding: 13px;
+    font-size:larger;
+    border: none;
+    outline: none;
+    background: none;
+    color: white;
+}
+
+.icon{
+    padding: 10px;
+    transform: translate(0% , 40%);
+}
+
+.forgotpassword span{
+    color: rgb(80, 80, 253);
+    cursor: pointer;
+}
+
+.submit-container{
+    padding-top: 15px;
+    margin-top: 10px;
+    display: flex;
+    justify-content:center;
+    gap: 40px;
+    padding-top: 41px;
+}
+
+.submit{
+    background-color: blueviolet;
+    padding-left: 46px;
+    padding-right: 46px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border: 5px solid rgba(0, 0, 0, 0.089);
+    border-radius: 25px;
+
+}
+
+.none{
+    display: none;
+}
+
+.gray{
+    background-color: #817d7d1f;
+}

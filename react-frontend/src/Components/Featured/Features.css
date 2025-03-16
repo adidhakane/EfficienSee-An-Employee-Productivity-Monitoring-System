@@ -1,0 +1,36 @@
+.container {
+    padding-left: 8%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.feature{
+    border: 3px solid black;
+    border-radius: 7px;
+}
+
+#feature1, #feature2, #feature3{
+    width: 30%;
+    margin: 10px;
+    padding: 10px;
+}
+
+#feature1:hover {
+    background-color: lightcoral;
+    transition: background-color 0.5s ease-in-out; 
+}
+
+#feature2:hover{
+    background-color: lightblue;
+    transition: background-color 0.5s ease-in-out; 
+
+} 
+#feature3:hover{
+    background-color: #ff88008c;
+    transition: background-color 0.5s ease-in-out; 
+
+}
+
+
