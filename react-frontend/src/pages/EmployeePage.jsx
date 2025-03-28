@@ -15,7 +15,7 @@ const EmployeeDashboard = () => {
 
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/employees/fetch-data", {
+        const response = await axios.get("https://efficiensee-back-end.onrender.com/api/employees/fetch-data", {
           params: { employee: sanitizedEmail, range: "day" } // Replace with actual employee email
         });
         setEmployeeData(response.data);

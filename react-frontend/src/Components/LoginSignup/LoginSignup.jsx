@@ -44,7 +44,7 @@ const LoginSignup = () => {
 
       if (role.toLowerCase() === "employee") {
         try {
-          const response = await fetch("http://localhost:5000/api/employees/create-collection", {
+          const response = await fetch("https://efficiensee-back-end.onrender.com/api/employees/create-collection", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email }),

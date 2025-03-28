@@ -74,7 +74,7 @@ const Dashboard = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:5000/api/employees/fetch-data`, {
+        const response = await axios.get(`https://efficiensee-back-end.onrender.com/api/employees/fetch-data`, {
           params: { employee: sanitizedEmail, range }
         });
         setData(response.data);
