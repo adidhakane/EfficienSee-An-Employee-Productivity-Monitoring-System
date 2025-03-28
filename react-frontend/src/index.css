@@ -24,3 +24,21 @@ background-color: white;
       --chart-5: 340 75% 55%;
     }
   }  
+
+  /* Add to your main CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Smooth transitions for interactive elements */
+button, select {
+  transition: all 0.2s ease;
+}
+
+/* Card hover effect */
+.bg-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}

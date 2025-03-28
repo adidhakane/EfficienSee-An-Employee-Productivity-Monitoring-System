@@ -1,16 +1,37 @@
 const express = require("express");
-const Employee = require("../models/Employee");
-
 const router = express.Router();
+const mongoose = require("mongoose");
 
-// GET: Fetch `Estimate_time`
-router.get("/estimate-time", async (req, res) => {
+// MongoDB connection setup
+const db = mongoose.connection;
+
+// Define Schema (Not mandatory to use since collection is dynamic, but can be kept)
+const employeeSchema = new mongoose.Schema({
+    Estimate_time: String,
+});
+
+// Dynamic route for fetching Estimate_time
+router.get("/Estimate_time/:employee", async (req, res) => {
     try {
-        const employees = await Employee.find({}, "Estimate_time");
-        res.json(employees);
-    } catch (error) {
-        console.error("❌ Error Fetching Data:", error);
-        res.status(500).json({ message: "Internal Server Error" });
+        const employee = req.params.employee; // Example: Employee1
+        console.log(`Fetching data from: ${employee}`);
+
+        // Dynamically access the collection
+        const collection = db.collection(employee);
+
+        // Fetch documents
+        const documents = await collection.find({}).toArray();
+        console.log("Fetched documents:", documents);
+
+        // Extract Estimate_time field
+        const estimateTimes = documents.map((doc) => doc.Estimate_time);
+        console.log("Estimate Times:", estimateTimes);
+
+        // Send response
+        res.json(estimateTimes);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Error retrieving Estimate_time");
     }
 });
 

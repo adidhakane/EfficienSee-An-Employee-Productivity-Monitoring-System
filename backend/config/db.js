@@ -2,10 +2,12 @@ const mongoose = require("mongoose");
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
-        console.log("✅ MongoDB Connected");
+        await mongoose.connect(process.env.MONGO_URI, {
+            dbName: "newEfficienSee_DB", // YOUR DB NAME
+        });
+        console.log("✅ MongoDB connected");
     } catch (error) {
-        console.error("❌ MongoDB Connection Failed:", error);
+        console.error("❌ MongoDB connection failed:", error);
         process.exit(1);
     }
 };

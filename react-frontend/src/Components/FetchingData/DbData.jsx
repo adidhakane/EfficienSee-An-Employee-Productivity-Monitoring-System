@@ -1,13 +1,12 @@
-import React from "react";
-import EmployeeEstimateTime from "./EmployeeEstimateTime";
+// import React from "react";
+// import EmployeeEstimateTime from "./EmployeeEstimateTime";
 
-function DbData() {
-    return (
-        <div>
-            <h1>EfficienSee Employee Data</h1>
-            <EmployeeEstimateTime />
-        </div>
-    );
-}
+// function DbData({ selectedEmployee }) {
+//     return (
+//         <div>
+//             <EmployeeEstimateTime employee={selectedEmployee} />
+//         </div>
+//     );
+// }
 
-export default DbData;
+// export default DbData;

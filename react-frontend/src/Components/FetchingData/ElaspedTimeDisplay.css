@@ -1,0 +1,40 @@
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .error-message {
+    padding: 2rem;
+    background: #fee2e2;
+    color: #dc2626;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    text-align: center;
+  }
+  
+  .no-data {
+    padding: 2rem;
+    background: #f0fdf4;
+    color: #059669;
+    border-radius: 0.5rem;
+    margin: 2rem;
+    text-align: center;
+  }
+  
+  .dashboard {
+    background: #f8fafc;
+    min-height: 100vh;
+  }
+  
+  .card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  }
