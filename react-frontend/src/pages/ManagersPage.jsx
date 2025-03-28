@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import Header from "@/components/Header";
-import Table from "@/components/Table";
+import Header from "@/Components/Header";
+import Table from "@/Components/Table";
 import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
