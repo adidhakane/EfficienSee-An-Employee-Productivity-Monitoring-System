@@ -16,8 +16,9 @@ export default function App(){
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/login" element={<LoginSignup/>}/>
           <Route path="/manager" element={<ManagersPage />} /> 
-          <Route path='/employee' element={<EmployeePage/>}/>
-          <Route path="*" element={<Navigate to="/" />} />{/* Catch-all route */}
+          {/* <Route path='/employee' element={<EmployeePage/>}/> */}
+          <Route path="/employee/*" element={<EmployeePage/>}/>
+          <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   )

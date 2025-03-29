@@ -5,7 +5,7 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import jsPDF from "jspdf";  
 import { BarChart, LineChart, CartesianGrid, XAxis, YAxis, Tooltip, Legend, Bar, Line } from 'recharts';
 import { db } from '@/Firebase/Firebase';
 import { collection, query, where, getDocs } from 'firebase/firestore';

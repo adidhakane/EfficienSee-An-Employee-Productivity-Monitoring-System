@@ -15,7 +15,9 @@ const PORT = process.env.PORT || 5000;
 // Middleware
 // Add at the top with other middleware
 app.use((req, res, next) => {
-  res.setHeader("Cache-Control", "no-store, max-age=0");
+  res.setHeader("Cache-Control", "no-store, must-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
   next();
 });
 

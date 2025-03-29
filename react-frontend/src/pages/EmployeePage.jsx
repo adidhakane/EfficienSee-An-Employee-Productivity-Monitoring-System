@@ -22,7 +22,11 @@ const EmployeeDashboard = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get("https://efficiensee-back-end.onrender.com/api/employees/fetch-data", {
-          params: { employee: sanitizedEmail, range: "day" } // Replace with actual employee email
+          // params: { employee: sanitizedEmail, range: "day" }
+          params: { employee: localStorage.getItem("sanitizedEmail"),  _: Date.now()  },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
         });
         setEmployeeData(response.data);
       } catch (error) {
@@ -30,8 +34,12 @@ const EmployeeDashboard = () => {
       }
     };
 
-    fetchData();
-  }, []);
+    if (!localStorage.getItem("token")) {
+      window.location.href = "/login";
+    } else {
+      fetchData();
+    }
+    }, []);
 
   const startMonitoring = async () => {
     try {
@@ -64,15 +72,14 @@ const EmployeeDashboard = () => {
 
   const handleLogout = () => {
     // Clear ALL auth-related storage
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    localStorage.removeItem("sanitizedEmail");
+    localStorage.clear();
+    sessionStorage.clear();
 
     // Clear Firebase session
     auth.signOut();
 
-    // Force full refresh
-    window.location.href = "/employee"; // Full page reload
+    // Force full page reload
+  window.location.href = "/login?nocache=" + Date.now();
   };
 
   let email = localStorage.getItem("email");
@@ -80,9 +87,18 @@ const EmployeeDashboard = () => {
   return (
     <div className="">
       <div style={{ background: "#2176ff", height: "4.2rem" }} className="flex flex-row justify-between"><span className="translate-y-4.5"
-        // onClick={() => navigate("/login")}
-        onClick={handleLogout}
-      > <ArrowBackIcon /> Go Back</span><h1 className="p-1.5 text-4xl font-medium -translate-x-9">Employee Dashboard</h1><div></div> </div>
+      // onClick={() => navigate("/login")}
+      // onClick={handleLogout}
+      >  {/* <ArrowBackIcon /> Go Back */}
+        <button
+          onClick={handleLogout}
+          className="text-white hover:text-gray-200 transition"
+        >
+          <ArrowBackIcon className="mr-1" /> Logout
+        </button>
+      
+      </span>
+        <h1 className="p-1.5 text-4xl font-medium -translate-x-9">Employee Dashboard</h1><div></div> </div>
       <br />
       <h1 className="flex flex-row justify-center text-2xl font-bold mb-4 mt-2.5">Displaying the Dashboard for user with email : &nbsp; <span className="text-blue-600">{email}</span> </h1>
 
