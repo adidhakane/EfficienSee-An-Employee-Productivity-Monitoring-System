@@ -91,7 +91,8 @@ const EmployeeDashboard = () => {
       // onClick={handleLogout}
       >  {/* <ArrowBackIcon /> Go Back */}
         <button
-          onClick={handleLogout}
+          // onClick={handleLogout}
+          onClick={() => navigate("/login")}
           className="text-white hover:text-gray-200 transition"
         >
           <ArrowBackIcon className="mr-1" /> Logout
