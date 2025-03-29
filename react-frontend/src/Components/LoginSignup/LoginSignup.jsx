@@ -17,6 +17,16 @@ const LoginSignup = () => {
   const [role, setRole] = useState("employee");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+
+  // ========== UPDATED LOGOUT LOGIC ========== //
+  const handleLogout = () => {
+    // Clear ALL storage
+    localStorage.clear();
+    // Firebase signout
+    auth.signOut();
+    // Force hard refresh with cache-buster
+    window.location.href = `/login?ts=${Date.now()}`;
+  };
   
   const handleSignup = async () => {
     try {
@@ -94,8 +104,15 @@ const LoginSignup = () => {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
+      // Get fresh Firebase token
+      const token = await user.getIdToken(); //c
+      localStorage.setItem("token", token); // Add this line //c
+
       const userDoc = await getDoc(doc(db, "users", user.uid));
       if (!userDoc.exists()) throw new Error("User data not found");
+
+      // Clear previous data
+      localStorage.removeItem("employeeData"); //c
 
       const userRole = userDoc.data().role.toLowerCase();
       const sanitizedEmail = sanitizeEmail(email);
@@ -109,12 +126,13 @@ const LoginSignup = () => {
       setError(error.message.replace("Firebase:", ""));
     }
   };
-
+  
   return (
     <div className="min-h-screen bg-blue-600 relative">
       {/* Back Button - Top Left */}
       <button 
-        onClick={() => navigate("/")} 
+        // onClick={() => navigate("/")} 
+        onClick={handleLogout}
         className="absolute top-4 left-4 z-20 text-white hover:text-gray-200 transition"
       >
         <ArrowBackIcon className="mr-1" /> Go Back

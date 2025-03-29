@@ -13,6 +13,9 @@ const employeeSchema = new mongoose.Schema({
 // Dynamic route for fetching Estimate_time
 router.get("/Estimate_time/:employee", async (req, res) => {
     try {
+        // Add cache-control header
+        res.setHeader("Cache-Control", "no-store");//c
+
         const employee = req.params.employee; // Example: Employee1
         console.log(`Fetching data from: ${employee}`);
 

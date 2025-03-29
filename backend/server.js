@@ -13,6 +13,12 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
+// Add at the top with other middleware
+app.use((req, res, next) => {
+  res.setHeader("Cache-Control", "no-store, max-age=0");
+  next();
+});
+
 app.use(cors({
   // origin: 'http://localhost:5173',
   origin: ["https://efficiensee-p80v.onrender.com",'http://localhost:5173'],

@@ -1,9 +1,10 @@
-import React, { useState , useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ElapsedTimeDisplay from "../Components/FetchingData/ElapsedTimeDisplay";
 import FetchingDataPro from "../Components/FetchingData/FetchingDataPro";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useNavigate } from "react-router-dom";
+import { auth } from "@/Firebase/Firebase";
 
 const EmployeeDashboard = () => {
   const [report, setReport] = useState(null);
@@ -11,6 +12,11 @@ const EmployeeDashboard = () => {
   const [employeeData, setEmployeeData] = useState([]);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+      return;
+    }
     const sanitizedEmail = localStorage.getItem("sanitizedEmail")
 
     const fetchData = async () => {
@@ -29,11 +35,11 @@ const EmployeeDashboard = () => {
 
   const startMonitoring = async () => {
     try {
-        const response = await axios.post("http://localhost:5001/start_monitoring", {});
-        console.log("Start Monitoring Response:", response.data);
-        setIsMonitoring(true);
+      const response = await axios.post("http://localhost:5001/start_monitoring", {});
+      console.log("Start Monitoring Response:", response.data);
+      setIsMonitoring(true);
     } catch (error) {
-        console.error("Error starting monitoring:", error.response ? error.response.data : error.message);
+      console.error("Error starting monitoring:", error.response ? error.response.data : error.message);
     }
   };
 
@@ -44,7 +50,7 @@ const EmployeeDashboard = () => {
         console.error("Error: Email not found in localStorage");
         return;
       }
-  
+
       const response = await axios.post("http://localhost:5001/stop_monitoring", { email });
       console.log("Stop Monitoring Response:", response.data);
       setIsMonitoring(false);
@@ -55,33 +61,49 @@ const EmployeeDashboard = () => {
       );
     }
   };
-  
+
+  const handleLogout = () => {
+    // Clear ALL auth-related storage
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    localStorage.removeItem("sanitizedEmail");
+
+    // Clear Firebase session
+    auth.signOut();
+
+    // Force full refresh
+    window.location.href = "/employee"; // Full page reload
+  };
+
   let email = localStorage.getItem("email");
   const navigate = useNavigate();
   return (
     <div className="">
-      <div style={{background : "#2176ff", height:"4.2rem"}} className="flex flex-row justify-between"><span className="translate-y-4.5" onClick={()=>navigate("/login")}> <ArrowBackIcon/> Go Back</span><h1 className="p-1.5 text-4xl font-medium -translate-x-9">Employee Dashboard</h1><div></div> </div>
+      <div style={{ background: "#2176ff", height: "4.2rem" }} className="flex flex-row justify-between"><span className="translate-y-4.5"
+        // onClick={() => navigate("/login")}
+        onClick={handleLogout}
+      > <ArrowBackIcon /> Go Back</span><h1 className="p-1.5 text-4xl font-medium -translate-x-9">Employee Dashboard</h1><div></div> </div>
       <br />
       <h1 className="flex flex-row justify-center text-2xl font-bold mb-4 mt-2.5">Displaying the Dashboard for user with email : &nbsp; <span className="text-blue-600">{email}</span> </h1>
-      
-      <div className="flex flex-row justify-center gap-26">
-      <button
-        onClick={startMonitoring}
-        className={`px-4 py-2 rounded-lg ${isMonitoring ? "bg-gray-500" : "bg-green-500"} text-white`}
-        disabled={isMonitoring}
-      >
-        {isMonitoring ? "Monitoring..." : "Start Working"}
-      </button>
 
-      <button
-        onClick={stopMonitoring}
-        className="ml-4 px-4 py-2 bg-red-500 text-white rounded-lg"
-        disabled={!isMonitoring}
-      >
-        Stop Working
-      </button>
+      <div className="flex flex-row justify-center gap-26">
+        <button
+          onClick={startMonitoring}
+          className={`px-4 py-2 rounded-lg ${isMonitoring ? "bg-gray-500" : "bg-green-500"} text-white`}
+          disabled={isMonitoring}
+        >
+          {isMonitoring ? "Monitoring..." : "Start Working"}
+        </button>
+
+        <button
+          onClick={stopMonitoring}
+          className="ml-4 px-4 py-2 bg-red-500 text-white rounded-lg"
+          disabled={!isMonitoring}
+        >
+          Stop Working
+        </button>
       </div>
-      
+
 
       {report && (
         <div className="mt-5 p-4 bg-gray-100 rounded-lg">
@@ -94,7 +116,7 @@ const EmployeeDashboard = () => {
           <p>Breaks Taken: {report.break_counter}</p>
         </div>
       )}
-          {/* record = {
+      {/* record = {
         "Date": datetime.now().strftime("%Y-%m-%d"),
         "elapsed_time": convert_to_hms(elapsed_time),  # Fixed calculation for total monitoring duration
         "tab_switched_count": tab_switch_count,
@@ -103,7 +125,7 @@ const EmployeeDashboard = () => {
         "break_time": convert_to_hms(total_break_time),
         "break_counter": break_counter
     } */}
-          <ElapsedTimeDisplay/>
+      <ElapsedTimeDisplay />
     </div>
 
   );
