@@ -1,30 +1,16 @@
-import "./Featured.css"
-import CountUp from "../Counter/CountUp";
-
-const Featured =()=>{
-    return(
-        <>
-        <div className="h-[400px] bg-white flex items-center justify-center flex-row">
-            <h1 className="text-6xl"><span>Employee</span> <br /><span>Working</span></h1>
-            <br />
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            <CountUp
-            from={0}
-            to={100}
-            separator=","
-            direction="up"
-            duration={1}
-            className="count-up-text text-6xl"
-            />
+const Featured = () => {
+    return (
+      <section className="py-20 bg-gradient-to-b from-slate-50 to-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold text-slate-800 mb-4">
+            Employee Productivity Analytics
+          </h2>
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
+            Transform raw data into actionable insights with our comprehensive workforce optimization platform
+          </p>
         </div>
-        
-        </>
-    )
-}
-
-export default Featured;
+      </section>
+    );
+  };
+  
+  export default Featured;
