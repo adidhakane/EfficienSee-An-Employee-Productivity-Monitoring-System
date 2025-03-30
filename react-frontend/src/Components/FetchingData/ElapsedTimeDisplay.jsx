@@ -123,7 +123,7 @@ const Dashboard = () => {
                   { category: 'Elapsed Time', value: convertTimeToHours(todayData.elapsed_time) },
                   { category: 'Active Time', value: convertTimeToHours(todayData.active_duration) },
                   { category: 'Inactive Time', value: convertTimeToHours(todayData.inactive_duration) },
-                  { category: 'Breaks', value: convertTimeToHours(todayData.break_time) }
+                  // { category: 'Breaks', value: convertTimeToHours(todayData.break_time) }
                 ]}
                 xField="category"
                 yField="value"

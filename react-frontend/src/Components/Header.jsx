@@ -6,7 +6,7 @@ const Header = () => {
   const navigate = useNavigate();
   return (
     <header className="bg-blue-600 text-white p-4">
-      <span className="translate-y-4.5" onClick={()=>navigate("/login")}> <ArrowBackIcon/> Go Back</span>
+      <span className="translate-y-4.5" onClick={()=>navigate("/login")}> <ArrowBackIcon/> Logout</span>
       <h1 className="text-2xl font-bold text-center" >EfficienSee - Manager's Dashboard</h1>
     </header>
   );
