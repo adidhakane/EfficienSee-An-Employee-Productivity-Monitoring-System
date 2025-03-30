@@ -8,7 +8,7 @@ const Footer = () => {
       title: "Email Us",
       content: [
         "bhishmadandekar@gmail.com",
-        "adityachakane@gmail.com",
+        "adityadhakane@gmail.com",
         "prathamdattawade@gmail.com"
       ]
     },

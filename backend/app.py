@@ -179,6 +179,8 @@ def api_stop_monitoring():
         "inactive_duration": convert_to_hms(inactive_duration),
         "break_time": convert_to_hms(total_break_time),
         "break_counter": break_counter
+        # "monitoring_start_time"
+        # "monitoring_stop_time"
     }
 
     try:
