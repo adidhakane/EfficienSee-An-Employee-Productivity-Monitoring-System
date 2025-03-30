@@ -167,32 +167,63 @@ app.get("/api/employees", async (req, res) => {
 
 
 // Data fetching endpoint
+// Update the /api/test endpoint mapping
 app.get("/api/test", async (req, res) => {
   try {
     const { employee, startDate, endDate } = req.query;
+    
+    // Validate inputs
+    if (!employee || !startDate || !endDate) {
+      return res.status(400).json({ error: "Missing required parameters" });
+    }
+
+    // Verify collection exists
+    const collectionExists = await mainConn.db.listCollections({ 
+      name: employee 
+    }).hasNext();
+
+    if (!collectionExists) {
+      return res.status(404).json({ error: "Employee collection not found" });
+    }
+
     const collection = mainConn.db.collection(employee);
 
+    // Query with proper date filtering
     const data = await collection.find({
-      date: { // Changed Date → date (case-sensitive)
+      date: { 
         $gte: startDate,
-        $lte: endDate
+        $lte: endDate 
       }
-    }).toArray();
+    }).sort({ date: 1 }).toArray();
 
-    // Map to frontend's expected format
+    if (data.length === 0) {
+      return res.status(404).json({ 
+        warning: "No records found for this date range",
+        query: { employee, startDate, endDate }
+      });
+    }
+
+    // Map with fallback values
     const mappedData = data.map(item => ({
-      Date: item.date,
-      Estimate_time: item.elapsed_time,
+      Date: item.date || "N/A",
+      Estimate_time: item.elapsed_time || "00:00:00",
       Tab_switched: parseInt(item.tab_switched_count) || 0,
-      Active_duration: item.active_duration,
-      Inactive_duration: item.inactive_duration,
-      Total_break_time: item.break_time,
-      Breaks: parseInt(item.break_counter) || 0
+      Active_duration: item.active_duration || "00:00:00",
+      Inactive_duration: item.inactive_duration || "00:00:00",
+      Total_break_time: item.break_time || "00:00:00",
+      Breaks: parseInt(item.break_counter) || 0,
+      start_time: item.start_time || "09:00:00",
+      stop_time: item.stop_time || "18:00:00"
     }));
 
     res.json(mappedData);
+
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("API Error:", error);
+    res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message 
+    });
   }
 });
 
