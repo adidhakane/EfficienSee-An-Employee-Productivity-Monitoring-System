@@ -19,7 +19,7 @@ import atexit
 # Load environment variables
 load_dotenv()
 MONGO_URI = os.getenv("MONGO_URI")
-MODEL_PATH = os.getenv("MODEL_PATH", "C:/Users/Hp/OneDrive/Desktop/Project check/efficiensee_Model.h5")
+MODEL_PATH = os.getenv("MODEL_PATH", r"D:\TY\SEM-II\EDAI6\Main-EfficienSee\Final-Local-EfficienSee\backend\efficiensee_Model.h5")
 
 # Initialize logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -200,5 +200,4 @@ def cleanup():
 
 if __name__ == "__main__":
     logging.info("🚀 Starting Employee Monitoring System...")
-    port = int(os.environ.get("PORT", 5001))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True, port=5001)

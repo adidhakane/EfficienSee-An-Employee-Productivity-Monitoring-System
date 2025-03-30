@@ -1,34 +1,52 @@
+// Company.jsx (Enhanced Hero Section)
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Company = () => {
   const navigate = useNavigate();
-  
+
   return (
     <div className="relative w-full h-screen overflow-hidden">
-      {/* Background Image */}
-      <img
-        className="absolute inset-0 w-full h-full object-cover z-0"
-        src="/Images/company.jpg"
-        alt="A Company Image"
-      />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-blue-900/80 to-indigo-900/80 z-10"></div>
       
-      {/* Dark overlay for better text visibility */}
-      <div className="absolute inset-0 bg-image bg-opacity-30 z-1"></div>
-      
-      {/* Content Container - centered */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-4">
-        {/* Company Name */}
-        <h1 className="text-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8">
-          EfficienSee
-        </h1>
-        
-        {/* Get Started Button */}
-        <button 
-          onClick={() => navigate("/login")} 
-          className="text-white text-xl sm:text-2xl md:text-3xl border-2 border-white rounded-sm px-6 py-2 transition-all duration-300 ease-in-out hover:bg-blue-700 hover:border-blue-500 hover:scale-105"
+      {/* Animated Background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          className="w-full h-full object-cover object-center animate-kenburns"
+          src="/src/Components/Assets/company.jpg"
+          alt="Workplace collaboration"
+        />
+      </div>
+
+      {/* Content Container */}
+      <div className="relative z-20 h-full flex flex-col items-center justify-center text-center px-4 space-y-8">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-white text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400"
         >
-          Get Started!
-        </button>
+          EfficienSee
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="text-xl sm:text-2xl text-blue-100 max-w-2xl mx-auto"
+        >
+          Transform your workforce productivity with AI-powered analytics and real-time insights
+        </motion.p>
+
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          onClick={() => navigate("/login")} 
+          className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-lg px-8 py-3 rounded-lg transition-all duration-300 shadow-lg shadow-cyan-500/20"
+        >
+          Get Started Free
+        </motion.button>
       </div>
     </div>
   );
