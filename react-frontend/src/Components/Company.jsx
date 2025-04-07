@@ -39,14 +39,14 @@ const Company = () => {
           Transform your workforce productivity with AI-powered analytics and real-time insights
         </motion.p>
 
-        <motion.button 
+        {/* <motion.button 
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           onClick={() => navigate("/login")} 
           className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold text-lg px-8 py-3 rounded-lg transition-all duration-300 shadow-lg shadow-cyan-500/20"
         >
           Get Started Free
-        </motion.button>
+        </motion.button> */}
       </div>
     </div>
   );
