@@ -77,7 +77,7 @@ npm start
 ```bash
 pip install opencv-python pymongo python-dotenv
 ```
-5. ** Environment Configuration**
+5. **Environment Configuration**
 - Create .env files in both frontend and backend directories
 - Configure MongoDB Atlas connection string
 - Set up authentication secrets
